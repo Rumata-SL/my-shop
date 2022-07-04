@@ -18,15 +18,10 @@ export function App() {
                     </div>
                     <h2 className="content__title">Все пиццы</h2>
                     <div className="content__items">
-                        <PizzaBlock/>
-                        <PizzaBlock/>
-                        <PizzaBlock/>
-                        <PizzaBlock/>
-                        <PizzaBlock/>
-                        <PizzaBlock/>
-                        <PizzaBlock/>
-                        <PizzaBlock/>
-                        <PizzaBlock/>
+                        <PizzaBlock price={500} title={"Маргарита"}/>
+                        <PizzaBlock price={400} title={"Сыр бекон"}/>
+                        <PizzaBlock price={500} title={"Маргарита"}/>
+                        <PizzaBlock price={400} title={"Сыр бекон"}/>
                     </div>
                 </div>
             </div>
