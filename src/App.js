@@ -1,5 +1,6 @@
 import React from "react";
-import './App.css';
+// import './App.css';
+import "./scss/app.scss"
 
 export function App() {
     return (
