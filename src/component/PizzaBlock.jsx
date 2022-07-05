@@ -1,7 +1,12 @@
-import React from 'react';
+import React, {useState} from 'react';
 
 export const PizzaBlock = (props) => {
     const {price, title} = props
+    const [count, setCount]= useState(0)
+
+    const clickHandler = ()=>{
+            setCount(count + 1)
+    }
     return (
         <div className="pizza-block">
             <h4 className="pizza-block__title">{title}</h4>
@@ -25,8 +30,9 @@ export const PizzaBlock = (props) => {
             <div className="pizza-block__bottom">
                 <div className="pizza-block__price">от {price} ₽
                 </div>
-                <div
-                    className="button button--outline button--add">
+                <button
+                    className="button button--outline button--add"
+                    onClick={clickHandler}>
                     <svg
                         width="12"
                         height="12"
@@ -40,8 +46,8 @@ export const PizzaBlock = (props) => {
                         />
                     </svg>
                     <span>Добавить</span>
-                    <i>2</i>
-                </div>
+                    <i>{count}</i>
+                </button>
             </div>
         </div>
     );
