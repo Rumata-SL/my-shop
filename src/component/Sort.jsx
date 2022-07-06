@@ -4,15 +4,16 @@ export const Sort = () => {
 
     const [isVisible, setIsVisible] = useState(false)
     const [listActive, setListActive] = useState(0)
+
     const list = ["популярности", "цене", "алфавиту"]
     const sortName = list[listActive]
 
     const isVisibleHandler = (i)=>{
         setListActive(i)
-        setIsVisible(!isVisible)
+        setIsVisible(false)
     }
 
-    const listRender = list.map((el, i) => {
+    const listRenderPopUp = list.map((el, i) => {
         return <>
             <li key={i} className={listActive === i ? "active" : ""}
                 onClick={() => {
@@ -44,7 +45,7 @@ export const Sort = () => {
             {
                 isVisible ? <div className="sort__popup">
                     <ul>
-                        {listRender}
+                        {listRenderPopUp}
                     </ul>
                 </div> : null
             }
