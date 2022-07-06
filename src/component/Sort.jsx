@@ -1,7 +1,27 @@
-import React from "react";
+import React, {useState} from "react";
 
-export const Sort = ()=>{
-    return(
+export const Sort = () => {
+
+    const [isVisible, setIsVisible] = useState(false)
+    const [listActive, setListActive] = useState(0)
+    const list = ["популярности", "цене", "алфавиту"]
+    const sortName = list[listActive]
+
+    const isVisibleHandler = (i)=>{
+        setListActive(i)
+        setIsVisible(!isVisible)
+    }
+
+    const listRender = list.map((el, i) => {
+        return <>
+            <li key={i} className={listActive === i ? "active" : ""}
+                onClick={() => {
+                    isVisibleHandler(i)
+                }}>{el}</li>
+        </>
+    })
+
+    return (
         <div className="sort">
             <div className="sort__label">
                 <svg
@@ -17,15 +37,18 @@ export const Sort = ()=>{
                     />
                 </svg>
                 <b>Сортировка по:</b>
-                <span>популярности</span>
+                <span onClick={() => {
+                    setIsVisible(!isVisible)
+                }}>{sortName}</span>
             </div>
-            <div className="sort__popup">
-                <ul>
-                    <li className="active">популярности</li>
-                    <li>цене</li>
-                    <li>алфавиту</li>
-                </ul>
-            </div>
+            {
+                isVisible ? <div className="sort__popup">
+                    <ul>
+                        {listRender}
+                    </ul>
+                </div> : null
+            }
+
         </div>
     )
 }

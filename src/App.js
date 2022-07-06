@@ -1,9 +1,11 @@
-import React from "react";
 import "./scss/app.scss"
+import React from "react";
+import {Sort} from "./component/Sort";
+import pizzas from "./assets/pizza.json"
 import {Header} from "./component/Header";
 import {Categories} from "./component/Categories";
-import {Sort} from "./component/Sort";
 import {PizzaBlock} from "./component/PizzaBlock";
+
 
 
 export function App() {
@@ -18,10 +20,18 @@ export function App() {
                     </div>
                     <h2 className="content__title">Все пиццы</h2>
                     <div className="content__items">
-                        <PizzaBlock price={500} title={"Маргарита"}/>
-                        <PizzaBlock price={400} title={"Сыр бекон"}/>
-                        <PizzaBlock price={500} title={"Маргарита"}/>
-                        <PizzaBlock price={400} title={"Сыр бекон"}/>
+                        {
+                            pizzas.map((obj)=>{
+                                return <PizzaBlock
+                                    key={obj.id}
+                                    price={obj.price}
+                                    title={obj.title}
+                                    imageUrl={obj.imageUrl}
+                                    sizes={obj.sizes}
+                                    types={obj.types}
+                                />
+                            })
+                        }
                     </div>
                 </div>
             </div>
