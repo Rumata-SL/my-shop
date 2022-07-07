@@ -5,6 +5,7 @@ import {Sort} from "./component/Sort";
 import {Header} from "./component/Header";
 import {Categories} from "./component/Categories";
 import {PizzaBlock} from "./component/PizzaBlock";
+import {PizzaSkeleton} from "./component/PizzaSkeleton";
 
 
 export function App() {
@@ -33,7 +34,7 @@ export function App() {
                     <div className="content__items">
                         {
                             items.map((obj) => {
-                                return <PizzaBlock
+                                return <PizzaSkeleton
                                     key={obj.id}
                                     price={obj.price}
                                     title={obj.title}
@@ -43,9 +44,24 @@ export function App() {
                                 />
                             })
                         }
+
                     </div>
                 </div>
             </div>
         </div>
     );
 }
+
+/*
+{
+    items.map((obj) => {
+        return <PizzaBlock
+            key={obj.id}
+            price={obj.price}
+            title={obj.title}
+            imageUrl={obj.imageUrl}
+            sizes={obj.sizes}
+            types={obj.types}
+        />
+    })
+}*/
