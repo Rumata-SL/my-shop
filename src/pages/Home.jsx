@@ -3,6 +3,7 @@ import {Categories} from "../component/categories/Categories";
 import {Sort} from "../component/sort/Sort";
 import {PizzaSkeleton} from "../component/pizza_block/PizzaSkeleton";
 import {PizzaBlock} from "../component/pizza_block/PizzaBlock";
+// import con from "../scss/app.scss"
 
 export const Home = () => {
     const [items, setItems] = useState([])
@@ -17,7 +18,7 @@ export const Home = () => {
             })
     }, [])
     return (
-        <>
+        <div className="container">
             <div className="content__top">
                 <Categories/>
                 <Sort/>
@@ -37,6 +38,6 @@ export const Home = () => {
                             types={obj.types}
                         />)}
             </div>
-        </>
+        </div>
     );
 };
