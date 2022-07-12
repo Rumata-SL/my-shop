@@ -1,21 +1,20 @@
 import React, {useState} from "react";
 
-export const Sort = () => {
-
+export const Sort = (props) => {
+    const {sortType, onChangeSort} = props
     const [isVisible, setIsVisible] = useState(false)
-    const [listActive, setListActive] = useState(0)
-
+    // const [listActive, setListActive] = useState(0)
     const list = ["популярности", "цене", "алфавиту"]
-    const sortName = list[listActive]
+    const sortName = list[sortType]
 
-    const isVisibleHandler = (i)=>{
-        setListActive(i)
+    const isVisibleHandler = (i) => {
+        onChangeSort(i)
         setIsVisible(false)
     }
 
     const listRenderPopUp = list.map((el, i) => {
         return <>
-            <li key={i} className={listActive === i ? "active" : ""}
+            <li key={i} className={sortType === i ? "active" : ""}
                 onClick={() => {
                     isVisibleHandler(i)
                 }}>{el}</li>
