@@ -2,8 +2,10 @@ import React, {useState} from "react";
 
 export const Sort = (props) => {
     const {sortType, onChangeSort} = props
+
     const [isVisible, setIsVisible] = useState(false)
     // const [listActive, setListActive] = useState(0)
+
     const list = [
         {name: "популярности (DESC)", sortProperty: "rating"},
         {name: "популярности (ASC)", sortProperty: "_rating"},

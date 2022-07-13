@@ -3,7 +3,6 @@ import {Categories} from "../component/categories/Categories";
 import {Sort} from "../component/sort/Sort";
 import {PizzaSkeleton} from "../component/pizza_block/PizzaSkeleton";
 import {PizzaBlock} from "../component/pizza_block/PizzaBlock";
-// import con from "../scss/app.scss"
 
 export const Home = () => {
 
