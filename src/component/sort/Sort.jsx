@@ -4,20 +4,29 @@ export const Sort = (props) => {
     const {sortType, onChangeSort} = props
     const [isVisible, setIsVisible] = useState(false)
     // const [listActive, setListActive] = useState(0)
-    const list = ["популярности", "цене", "алфавиту"]
-    const sortName = list[sortType]
+    const list = [
+        {name: "популярности (DESC)", sortProperty: "rating"},
+        {name: "популярности (ASC)", sortProperty: "_rating"},
+        {name: "цене (DESC)", sortProperty: "price"},
+        {name: "цене (ASC)", sortProperty: "_price"},
+        {name: "алфавиту (DESC)", sortProperty: "title"},
+        {name: "алфавиту (ASC)", sortProperty: "_title"},
+    ]
+
+
+    // const sortName = list[sortType].name
 
     const isVisibleHandler = (i) => {
         onChangeSort(i)
         setIsVisible(false)
     }
 
-    const listRenderPopUp = list.map((el, i) => {
+    const listRenderPopUp = list.map((obj, i) => {
         return <>
-            <li key={i} className={sortType === i ? "active" : ""}
+            <li key={i} className={sortType.sortProperty === obj.sortProperty ? "active" : ""}
                 onClick={() => {
-                    isVisibleHandler(i)
-                }}>{el}</li>
+                    isVisibleHandler(obj)
+                }}>{obj.name}</li>
         </>
     })
 
@@ -39,7 +48,7 @@ export const Sort = (props) => {
                 <b>Сортировка по:</b>
                 <span onClick={() => {
                     setIsVisible(!isVisible)
-                }}>{sortName}</span>
+                }}>{sortType.name}</span>
             </div>
             {
                 isVisible ? <div className="sort__popup">
