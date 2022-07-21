@@ -24,4 +24,4 @@ export const pizzasSlice = createSlice({
 
 export const { increment, decrement, incrementByAmount } = pizzasSlice.actions
 
-export default pizzasSlice.reducer
+// export default pizzasSlice.reducer

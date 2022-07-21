@@ -1,7 +1,10 @@
 import React, {useState} from "react";
+import {useDispatch, useSelector} from "react-redux";
+import {setSortType} from "../../redux/slice/filterSlice";
 
 export const Sort = (props) => {
-    const {sortType, onChangeSort} = props
+    const sortType = useSelector(state=>state.filter.sort)
+    const dispatch = useDispatch()
 
     const [isVisible, setIsVisible] = useState(false)
     // const [listActive, setListActive] = useState(0)
@@ -19,7 +22,7 @@ export const Sort = (props) => {
     // const sortName = list[sortType].name
 
     const isVisibleHandler = (i) => {
-        onChangeSort(i)
+        dispatch(setSortType(i))
         setIsVisible(false)
     }
 
