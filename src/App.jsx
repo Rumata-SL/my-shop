@@ -4,7 +4,7 @@ import React, {useState} from "react";
 import {Header} from "./component/header/Header";
 import {Home} from "./pages/Home";
 import {NotFound} from "./pages/NotFound";
-import {Routes, Route} from "react-router-dom";
+import {Route, Routes} from "react-router-dom";
 import {Cart} from "./pages/Cart";
 
 export const SearchContext = React.createContext("");
@@ -18,9 +18,9 @@ export function App() {
                 <div className="content">
                     {/*<div className="container">*/}
                     <Routes>
-                        <Route path="/" element={<Home/>}/>
-                        <Route path="/cart" element={<Cart/>}/>
-                        <Route path="*" element={<NotFound/>}/>
+                        <Route path="/" element={<Home/>}></Route>
+                        <Route path="/cart" element={<Cart/>}></Route>
+                        <Route path="*" element={<NotFound/>}></Route>
                     </Routes>
                     {/*</div>*/}
                 </div>

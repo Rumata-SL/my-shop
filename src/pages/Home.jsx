@@ -48,14 +48,16 @@ export const Home = () => {
     const skeletons = [...new Array(4)].map((_, i) => <PizzaSkeleton
         key={i}/>)
 
-    const pizzas = items.map((obj) => <PizzaBlock
-        key={obj.id}
-        price={obj.price}
-        title={obj.title}
-        imageUrl={obj.imageUrl}
-        sizes={obj.sizes}
-        types={obj.types}
-    />)
+    const pizzas = items.map((obj) => {
+      return  <PizzaBlock
+            key={obj.id}
+            price={obj.price}
+            title={obj.title}
+            imageUrl={obj.imageUrl}
+            sizes={obj.sizes}
+            types={obj.types}
+        />
+    })
 
     return (
         <div className="container">

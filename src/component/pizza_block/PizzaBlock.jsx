@@ -11,7 +11,7 @@ export const PizzaBlock = (props) => {
 
     const pizzaSizes = sizes.map((el, index) => {
         return <>
-            <li key={index} onClick={() => {
+            <li key={`${el}${index}`} onClick={() => {
                 setActiveSizes(index)
             }} className={activeSizes === index ? "active" : ""}>{el} см.
             </li>
@@ -20,7 +20,7 @@ export const PizzaBlock = (props) => {
 
     const pizzaTypes = types.map((el, index) => {
         return <>
-            <li key={index} onClick={() => {
+            <li key={`${el}${index}`} onClick={() => {
                 setActiveTypes(index)
             }} className={activeTypes === index ? "active" : ""}> {typeName[index]}</li>
         </>
