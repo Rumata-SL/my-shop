@@ -5,25 +5,22 @@ import {PizzaSkeleton} from "../component/pizza_block/PizzaSkeleton";
 import {PizzaBlock} from "../component/pizza_block/PizzaBlock";
 import {Pagination} from "../component/pagination/Pagination";
 import {SearchContext} from "../App";
+import {useDispatch, useSelector} from "react-redux";
+import {setCategoryId, setSortType} from "../redux/slice/filterSlice";
 
 export const Home = () => {
+    const categoryId = useSelector(state=>state.filter.categoryId)
+    const sortType = useSelector(state=>state.filter.sort)
+    const dispatch = useDispatch()
+
     const {searchValue} = useContext(SearchContext)
 
     const [items, setItems] = useState([])
     const [isLoading, setIsLoading] = useState(true)
-    const [categoryId, setCategoryId] = useState(0)
     const [currentPage, setCurrentPage] = useState(1)
-    const [sortType, setSortType] = useState({
-        name: "популярности",
-        sortProperty: "rating"
-    })
 
     const onClickCategory = (id) => {
-        setCategoryId(id)
-    }
-
-    const onChangeSort = (id) => {
-        setSortType(id)
+        dispatch(setCategoryId(id))
     }
 
     const url = "https://62d57f1515ad24cbf2c86df6.mockapi.io/items?"
@@ -64,7 +61,7 @@ export const Home = () => {
             <div className="content__top">
                 <Categories value={categoryId}
                             onClickCategory={onClickCategory}/>
-                <Sort sortType={sortType} onChangeSort={onChangeSort}/>
+                <Sort/>
             </div>
             <h2 className="content__title">Все пиццы</h2>
             <div className="content__items">

@@ -4,7 +4,7 @@ import {pizzasSlice} from "./slice/pizzasSlice";
 
 export const store = configureStore({
     reducer: {
-        filter: filterSlice,
-        pizzas: pizzasSlice,
+        filter: filterSlice.reducer,
+        pizzas: pizzasSlice.reducer,
     },
 })
