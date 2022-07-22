@@ -6,37 +6,42 @@ import {PizzaBlock} from "../component/pizza_block/PizzaBlock";
 import {Pagination} from "../component/pagination/Pagination";
 import {SearchContext} from "../App";
 import {useDispatch, useSelector} from "react-redux";
-import {setCategoryId, setSortType} from "../redux/slice/filterSlice";
+import {
+    setCategoryId,
+    setCurrentPage
+} from "../redux/slice/filterSlice";
+import axios from "axios";
 
 export const Home = () => {
     const categoryId = useSelector(state=>state.filter.categoryId)
     const sortType = useSelector(state=>state.filter.sort)
+    const currentPage = useSelector(state=>state.filter.currentPage)
     const dispatch = useDispatch()
 
     const {searchValue} = useContext(SearchContext)
 
     const [items, setItems] = useState([])
     const [isLoading, setIsLoading] = useState(true)
-    const [currentPage, setCurrentPage] = useState(1)
+    // const [currentPage, setCurrentPage] = useState(1)
 
     const onClickCategory = (id) => {
         dispatch(setCategoryId(id))
     }
 
     const url = "https://62d57f1515ad24cbf2c86df6.mockapi.io/items?"
-
+    /*const instance = axios.create({
+        baseURL: "https://62d57f1515ad24cbf2c86df6.mockapi.io/items?",
+    })*/
     useEffect(() => {
         setIsLoading(true)
-
         const category = categoryId > 0 ? `category=${categoryId}` : ''
         const order = sortType.sortProperty.includes("_",) ? "asc" : "desc";
         const sortBy = sortType.sortProperty.replace("_", "")
         const search = searchValue ? `&search=${searchValue}` : ''
 
-        fetch(`${url}page=${currentPage}&limit=4${category}&sortBy=${sortBy}&order=${order}${search}`)
-            .then(res => res.json())
+        axios.get(`${url}page=${currentPage}&limit=4${category}&sortBy=${sortBy}&order=${order}${search}`)
             .then(res => {
-                setItems(res)
+                setItems(res.data)
                 setIsLoading(false)
             })
         // window.scrollTo(0, 0)
@@ -67,7 +72,7 @@ export const Home = () => {
             <div className="content__items">
                 {isLoading ? skeletons : pizzas}
             </div>
-            <Pagination onChangePage={(number)=>setCurrentPage(number)}/>
+            <Pagination currentPage={currentPage} onChangePage={(number)=>dispatch(setCurrentPage(number))}/>
         </div>
     );
 };
