@@ -9,7 +9,6 @@ export const pizzasSlice = createSlice({
     initialState,
     reducers: {
         increment: (state) => {
-
             state.value += 1
         },
         decrement: (state) => {
@@ -20,7 +19,6 @@ export const pizzasSlice = createSlice({
         },
     },
 })
-
 
 export const { increment, decrement, incrementByAmount } = pizzasSlice.actions
 

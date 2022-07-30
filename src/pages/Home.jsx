@@ -77,7 +77,6 @@ export const Home = () => {
         }
     }, [])
 
-
     useEffect(() => {
         window.scrollTo(0, 0);
 
@@ -86,10 +85,6 @@ export const Home = () => {
         }
         isSearch.current = false
     }, [categoryId, sort.sortProperty, searchValue, currentPage])
-
-
-
-
 
     const skeletons = [...new Array(4)].map((_, i) => <PizzaSkeleton
         key={i}/>)

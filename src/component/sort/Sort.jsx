@@ -16,12 +16,6 @@ export const Sort = (props) => {
     const dispatch = useDispatch()
 
     const [isVisible, setIsVisible] = useState(false)
-    // const [listActive, setListActive] = useState(0)
-
-
-
-
-    // const sortName = list[sortType].name
 
     const isVisibleHandler = (i) => {
         dispatch(setSortType(i))
