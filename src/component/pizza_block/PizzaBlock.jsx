@@ -1,33 +1,52 @@
 import React, {useState} from 'react';
+import {useDispatch, useSelector} from "react-redux";
+import {addItem} from "../../redux/slice/cartSlice";
 
 
 export const PizzaBlock = (props) => {
-    const {price, title, imageUrl, sizes, types} = props
+    const {id, price, title, imageUrl, sizes, types} = props
+
+    const dispatch = useDispatch()
+    const cartItem = useSelector(state => state.cart.items.find(obj => obj.id === id))
 
     const [activeSizes, setActiveSizes] = useState(0)
     const [activeTypes, setActiveTypes] = useState(0)
 
     const typeName = ["тонкое", "традиционное"]
 
+    const onClickAdd = () => {
+        const item = {
+            id,
+            title,
+            price,
+            imageUrl,
+            type: typeName[activeTypes],
+            size: sizes[activeSizes],
+        }
+        dispatch(addItem(item))
+    }
+
     const pizzaSizes = sizes.map((el, index) => {
         return <>
-            <li key={`${el}${index}`} onClick={() => {
+            <li key={el} onClick={() => {
                 setActiveSizes(index)
             }} className={activeSizes === index ? "active" : ""}>{el} см.
             </li>
         </>
     })
 
-    const pizzaTypes = types.map((el, index) => {
+    const pizzaTypes = types.map((el) => {
         return <>
-            <li key={`${el}${index}`} onClick={() => {
-                setActiveTypes(index)
-            }} className={activeTypes === index ? "active" : ""}> {typeName[index]}</li>
+            <li key={el} onClick={() => {
+                setActiveTypes(el)
+            }}
+                className={activeTypes === el ? "active" : ""}> {typeName[el]}</li>
         </>
     })
+    const addedCount = cartItem ? cartItem.count : 0;
 
     return (
-        <div  className="pizza-block-wrapper">
+        <div className="pizza-block-wrapper">
             <div className="pizza-block">
 
                 <img
@@ -47,7 +66,8 @@ export const PizzaBlock = (props) => {
                 <div className="pizza-block__bottom">
                     <div className="pizza-block__price">от {price} ₽
                     </div>
-                    <button className="button button--outline button--add">
+                    <button onClick={onClickAdd}
+                            className="button button--outline button--add">
                         <svg
                             width="12"
                             height="12"
@@ -61,7 +81,9 @@ export const PizzaBlock = (props) => {
                             />
                         </svg>
                         <span>Добавить</span>
-                        <i>0</i>
+                        {
+                            addedCount > 0 && <i>{addedCount}</i>
+                        }
                     </button>
                 </div>
             </div>
