@@ -26,22 +26,20 @@ export const PizzaBlock = (props) => {
         dispatch(addItem(item))
     }
 
-    const pizzaSizes = sizes.map((el, index) => {
-        return <>
-            <li key={el} onClick={() => {
+    const pizzaSizes = sizes.map((size, index) => {
+        return <li key={size} onClick={() => {
                 setActiveSizes(index)
-            }} className={activeSizes === index ? "active" : ""}>{el} см.
+            }} className={activeSizes === index ? "active" : ""}>{size} см.
             </li>
-        </>
+
     })
 
-    const pizzaTypes = types.map((el) => {
-        return <>
-            <li key={el} onClick={() => {
-                setActiveTypes(el)
+    const pizzaTypes = types.map((typeId, i) => {
+        return <li key={typeId} onClick={() => {
+                setActiveTypes(typeId)
             }}
-                className={activeTypes === el ? "active" : ""}> {typeName[el]}</li>
-        </>
+                className={activeTypes === typeId ? "active" : ""}> {typeName[typeId]}</li>
+
     })
     const addedCount = cartItem ? cartItem.count : 0;
 
