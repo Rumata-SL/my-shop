@@ -7,31 +7,30 @@ export const CartItem = (props) => {
 
     const dispatch = useDispatch()
 
-    const onClickPlus = ()=>{
+    const onClickPlus = () => {
         dispatch(addItem({
             id
         }))
     }
-    const onClickMinus = ()=>{
-        if(count>0){
-        dispatch(minusItem(id))
+    const onClickMinus = () => {
+        if (count > 0) {
+            dispatch(minusItem(id))
         }
     }
 
-    const onClickRemove = ()=>{
-        if(window.confirm('Are you sure want to remove ?')){
-        dispatch(removeItem(id))
+    const onClickRemove = () => {
+        if (window.confirm('Are you sure want to remove ?')) {
+            dispatch(removeItem(id))
         }
     }
-
 
     return (
         <div className="cart__item">
             <div className="cart__item-img">
                 <img
-                className="pizza-block__image"
-                src={imageUrl}
-                alt="Pizza"/>
+                    className="pizza-block__image"
+                    src={imageUrl}
+                    alt="Pizza"/>
             </div>
             <div className="cart__item-info"><h3>{title}</h3>
                 <p>{type}, {size} см.</p></div>
@@ -51,7 +50,7 @@ export const CartItem = (props) => {
                 </button>
                 <b>{count}</b>
                 <button onClick={onClickPlus}
-                    className="button button--outline button--circle cart__item-count-plus">
+                        className="button button--outline button--circle cart__item-count-plus">
                     <svg width="10" height="10" viewBox="0 0 10 10"
                          fill="none"
                          xmlns="http://www.w3.org/2000/svg">
@@ -67,7 +66,7 @@ export const CartItem = (props) => {
             <div className="cart__item-price"><b>{price * count} ₽</b></div>
             <div className="cart__item-remove">
                 <div onClick={onClickRemove}
-                    className="button button--outline button--circle">
+                     className="button button--outline button--circle">
                     <svg width="10" height="10" viewBox="0 0 10 10"
                          fill="none"
                          xmlns="http://www.w3.org/2000/svg">

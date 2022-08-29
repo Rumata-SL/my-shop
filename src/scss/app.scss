@@ -25,6 +25,20 @@ body {
 .content {
   padding: 40px 0;
 
+  &__error-info{
+    text-align: center;
+    margin: 60px auto;
+    width: 580px;
+
+    h2{
+      font-size: 28px;
+      font-weight: bold;
+    }
+    p{
+      font-size: 20px;
+    }
+  }
+
   &__title {
     margin: 35px 0;
     font-weight: 900;
@@ -296,7 +310,7 @@ body {
 
         span {
           color: darken($color: $gray-line, $amount: 20);
-          font-weight: 500;
+          //font-weight: 500;
           font-weight: 600;
         }
 
@@ -346,7 +360,7 @@ body {
       color: #777777;
     }
 
-    icon {
+    .icon {
       position: relative;
       top: 2px;
     }
