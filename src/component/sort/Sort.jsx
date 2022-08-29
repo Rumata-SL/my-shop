@@ -1,4 +1,4 @@
-import React, {useState} from "react";
+import React, {useEffect, useRef, useState} from "react";
 import {useDispatch, useSelector} from "react-redux";
 import {setSortType} from "../../redux/slice/filterSlice";
 
@@ -12,10 +12,11 @@ export const list = [
     {name: "алфавиту (ASC)", sortProperty: "_title"},
 ]
 export const Sort = (props) => {
-    const sortType = useSelector(state=>state.filter.sort)
+    const sortType = useSelector(state => state.filter.sort)
     const dispatch = useDispatch()
 
     const [isVisible, setIsVisible] = useState(false)
+    const sortRef = useRef()
 
     const isVisibleHandler = (i) => {
         dispatch(setSortType(i))
@@ -24,15 +25,29 @@ export const Sort = (props) => {
 
     const listRenderPopUp = list.map((obj, i) => {
         return <>
-            <li key={i} className={sortType.sortProperty === obj.sortProperty ? "active" : ""}
+            <li key={i}
+                className={sortType.sortProperty === obj.sortProperty ? "active" : ""}
                 onClick={() => {
                     isVisibleHandler(obj)
                 }}>{obj.name}</li>
         </>
     })
+    useEffect(() => {
+        const handleClickOutside = (event) => {
+            if (!event.path.includes(sortRef.current)) {
+                console.log('был клик на сорт')
+                setIsVisible(false)
+            }
+        }
+        document.body.addEventListener('click', handleClickOutside)
+
+        return ()=>{
+            document.body.removeEventListener('click', handleClickOutside)
+        }
+    }, [])
 
     return (
-        <div className="sort">
+        <div ref={sortRef} className="sort">
             <div className="sort__label">
                 <svg
                     width="10"
