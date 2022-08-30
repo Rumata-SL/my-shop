@@ -35,7 +35,6 @@ export const Sort = (props) => {
     useEffect(() => {
         const handleClickOutside = (event) => {
             if (!event.path.includes(sortRef.current)) {
-                console.log('был клик на сорт')
                 setIsVisible(false)
             }
         }

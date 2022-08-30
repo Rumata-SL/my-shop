@@ -11,7 +11,7 @@ import {
     setFilters
 } from "../redux/slice/filterSlice";
 import qs from "qs"
-import {useNavigate} from "react-router-dom";
+import {Link, useNavigate} from "react-router-dom";
 import {fetchPizzas} from "../redux/slice/pizzasSlice";
 
 export const Home = () => {
@@ -85,10 +85,10 @@ export const Home = () => {
         key={i}/>)
 
     const pizzas = items.map((obj) => {
-        return <PizzaBlock
-            key={obj.id}
+        return <Link key={obj.id} to={`/pizza/${obj.id}`}><PizzaBlock
+
             {...obj}
-        />
+        /></Link>
     })
 
     if (status === 'error') {
