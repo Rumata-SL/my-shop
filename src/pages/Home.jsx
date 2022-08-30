@@ -1,17 +1,15 @@
-import React, {useContext, useEffect, useRef, useState} from 'react';
+import React, { useEffect, useRef} from 'react';
 import {Categories} from "../component/categories/Categories";
 import {list, Sort} from "../component/sort/Sort";
 import {PizzaSkeleton} from "../component/pizza_block/PizzaSkeleton";
 import {PizzaBlock} from "../component/pizza_block/PizzaBlock";
 import {Pagination} from "../component/pagination/Pagination";
-import {SearchContext} from "../App";
 import {useDispatch, useSelector} from "react-redux";
 import {
     setCategoryId,
     setCurrentPage,
     setFilters
 } from "../redux/slice/filterSlice";
-// import axios from "axios";
 import qs from "qs"
 import {useNavigate} from "react-router-dom";
 import {fetchPizzas} from "../redux/slice/pizzasSlice";
@@ -23,9 +21,7 @@ export const Home = () => {
     const isMounted = useRef(false)
 
     const {items, status} = useSelector(state => state.pizzas)
-    const {categoryId, currentPage, sort} = useSelector(state => state.filter)
-
-    const {searchValue} = useContext(SearchContext)
+    const {categoryId, currentPage, sort, searchValue} = useSelector(state => state.filter)
 
     const onClickCategory = (id) => {
         dispatch(setCategoryId(id))

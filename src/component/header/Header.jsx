@@ -3,17 +3,16 @@ import pizzaLogo from "../../assets/img/pizza-logo.svg"
 import {Link} from "react-router-dom";
 import {Search} from "../search/Serch";
 import {useSelector} from "react-redux";
+import {selectCart} from "../../redux/slice/cartSlice";
 
 
 export const Header = () => {
-    const { items , totalPrice} = useSelector(state => state.cart)
+    const { items , totalPrice} = useSelector(selectCart)
 
     const totalCount = items.reduce((acc, item)=>{
         return acc+item.count
     }, 0)
 
-    // const {searchValue, setSearchValue} = useContext(SearchContext)
-    // const {searchValue, setSearchValue} = props
     return (
         <div className="header">
             <div className="container">
