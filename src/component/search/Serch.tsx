@@ -15,10 +15,10 @@ export const Search = () => {
     const onClickClear = () => {
         dispatch(setSearchValue(''))
         setValue("")
-        if(inputRef.current) {
+        /*if(inputRef.current) {
             inputRef.current.focus()
-        }
-        // inputRef.current?.focus()
+        }*/
+        inputRef.current?.focus()
     }
 
     const updateSearchValue = useCallback(
