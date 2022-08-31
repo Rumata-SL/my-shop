@@ -1,7 +1,7 @@
 import {createAsyncThunk, createSlice, PayloadAction} from "@reduxjs/toolkit"
 import axios from "axios";
 import {RootState} from "../store";
-import {CartItemType} from "./cartSlice";
+// import {CartItemType} from "./cartSlice";
 
 export type SearchPizzaParams = {
     sortBy: string;

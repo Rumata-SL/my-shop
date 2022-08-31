@@ -1,15 +1,9 @@
 import {createSlice, PayloadAction} from "@reduxjs/toolkit"
 import {RootState} from "../store";
-import {CartItemType} from "./cartSlice";
+import {SortPropertyEnum} from "../../component/sort/Sort";
+// import {CartItemType} from "./cartSlice";
 
-export enum SortPropertyEnum {
-    RATING_DESC = "rating",
-    RATING_ASC = "_rating",
-    TITLE_DESC = "title",
-    TITLE_ASC = "_title",
-    PRICE_DESC = "price",
-    PRICE_ASC = "_price",
-}
+
 
 export type SortType = {
     name: string

@@ -1,13 +1,20 @@
 import React, { useEffect, useRef, useState} from "react";
-import { useSelector} from "react-redux";
+import {useDispatch, useSelector} from "react-redux";
 import {
     selectFilterSort,
-    setSortType,
-    SortPropertyEnum, SortType
+    setSortType, SortType
 } from "../../redux/slice/filterSlice";
 import {useAppDispatch} from "../../redux/store";
 
 
+export enum SortPropertyEnum {
+    RATING_DESC = "rating",
+    RATING_ASC = "_rating",
+    TITLE_DESC = "title",
+    TITLE_ASC = "_title",
+    PRICE_DESC = "price",
+    PRICE_ASC = "_price",
+}
 export const list:Array<SortType> = [
     { name: 'популярности (DESC)', sortProperty: SortPropertyEnum.RATING_DESC },
     { name: 'популярности (ASC)', sortProperty: SortPropertyEnum.RATING_ASC },
@@ -18,7 +25,7 @@ export const list:Array<SortType> = [
 ]
 export const Sort = () => {
     const sortType = useSelector(selectFilterSort)
-    const dispatch = useAppDispatch()
+    const dispatch = useDispatch()
 
     const [isVisible, setIsVisible] = useState(false)
     const sortRef = useRef<HTMLDivElement | null>(null)
@@ -40,7 +47,7 @@ export const Sort = () => {
     useEffect(() => {
 
         const handleClickOutside = (event:MouseEvent) => {
-            console.log(event)
+
             if (sortRef.current && !event.composedPath().includes(sortRef.current)) {
                 setIsVisible(false)
             }
