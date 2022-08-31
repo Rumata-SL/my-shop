@@ -1,27 +1,29 @@
-import React, {useEffect, useRef, useState} from "react";
-import {useDispatch, useSelector} from "react-redux";
-import {selectFilter, setSortType} from "../../redux/slice/filterSlice";
+import React, { useEffect, useRef, useState} from "react";
+import { useSelector} from "react-redux";
+import {
+    selectFilterSort,
+    setSortType,
+    SortPropertyEnum, SortType
+} from "../../redux/slice/filterSlice";
+import {useAppDispatch} from "../../redux/store";
 
-type ListType = {
-    name:string
-    sortProperty:string
-}
-export const list:Array<ListType> = [
-    {name: "популярности (DESC)", sortProperty: "rating"},
-    {name: "популярности (ASC)", sortProperty: "_rating"},
-    {name: "цене (DESC)", sortProperty: "price"},
-    {name: "цене (ASC)", sortProperty: "_price"},
-    {name: "алфавиту (DESC)", sortProperty: "title"},
-    {name: "алфавиту (ASC)", sortProperty: "_title"},
+
+export const list:Array<SortType> = [
+    { name: 'популярности (DESC)', sortProperty: SortPropertyEnum.RATING_DESC },
+    { name: 'популярности (ASC)', sortProperty: SortPropertyEnum.RATING_ASC },
+    { name: 'цене (DESC)', sortProperty: SortPropertyEnum.PRICE_DESC },
+    { name: 'цене (ASC)', sortProperty: SortPropertyEnum.PRICE_ASC },
+    { name: 'алфавиту (DESC)', sortProperty: SortPropertyEnum.TITLE_DESC },
+    { name: 'алфавиту (ASC)', sortProperty: SortPropertyEnum.TITLE_ASC },
 ]
 export const Sort = () => {
-    const sortType = useSelector(selectFilter)
-    const dispatch = useDispatch()
+    const sortType = useSelector(selectFilterSort)
+    const dispatch = useAppDispatch()
 
     const [isVisible, setIsVisible] = useState(false)
     const sortRef = useRef<HTMLDivElement | null>(null)
 
-    const isVisibleHandler = (i:ListType) => {
+    const isVisibleHandler = (i:SortType) => {
         dispatch(setSortType(i))
         setIsVisible(false)
     }
@@ -36,8 +38,10 @@ export const Sort = () => {
         </>
     })
     useEffect(() => {
-        const handleClickOutside = (event:any) => {
-            if (!event.path.includes(sortRef.current)) {
+
+        const handleClickOutside = (event:MouseEvent) => {
+            console.log(event)
+            if (sortRef.current && !event.composedPath().includes(sortRef.current)) {
                 setIsVisible(false)
             }
         }

@@ -4,7 +4,7 @@ import {list, Sort} from "../component/sort/Sort";
 import {PizzaSkeleton} from "../component/pizza_block/PizzaSkeleton";
 import {PizzaBlock} from "../component/pizza_block/PizzaBlock";
 import {Pagination} from "../component/pagination/Pagination";
-import {useDispatch, useSelector} from "react-redux";
+import {useSelector} from "react-redux";
 import {
     selectFilter,
     setCategoryId,
@@ -13,11 +13,16 @@ import {
 } from "../redux/slice/filterSlice";
 import qs from "qs"
 import {useNavigate} from "react-router-dom";
-import {fetchPizzas, selectPizza} from "../redux/slice/pizzasSlice";
+import {
+    fetchPizzas,
+    SearchPizzaParams,
+    selectPizza
+} from "../redux/slice/pizzasSlice";
+import {useAppDispatch} from "../redux/store";
 
 export const Home = () => {
     const navigate = useNavigate()
-    const dispatch = useDispatch()
+    const dispatch = useAppDispatch()
     const isSearch = useRef(false)
     const isMounted = useRef(false)
 
@@ -38,13 +43,12 @@ export const Home = () => {
         const search = searchValue ? `search=${searchValue}` : ''
 
         dispatch(
-            //@ts-ignore
             fetchPizzas({
             sortBy,
             order,
             category,
             search,
-            currentPage
+            currentPage: String(currentPage),
         }));
         window.scrollTo(0, 0);
     }
@@ -64,10 +68,14 @@ export const Home = () => {
     useEffect(() => {
         if (window.location.search) {
             const params = qs.parse(window.location.search.substring(1));
-            const sort = list.find(obj => obj.sortProperty === params.sortProperty);
+            const sort = list.find(obj => obj.sortProperty === params.sortBy);
+            if(sort){
+                params.sort = sort
+            }
+            //@ts-ignore
             dispatch(setFilters({
                     ...params,
-                    sort,
+                    sort: sort ? sort : list[0],
                 }),
             );
             isSearch.current = true
