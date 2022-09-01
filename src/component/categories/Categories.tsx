@@ -1,4 +1,4 @@
-import React, {FC} from "react";
+import React, {FC, memo} from "react";
 
 type CategoriesPropsType = {
     value: number
@@ -6,7 +6,7 @@ type CategoriesPropsType = {
 }
 const category: Array<string> = ["Все", "Мясные", "Вегетарианская", "Гриль", "Острые", "Закрытые"]
 
-export const Categories: FC<CategoriesPropsType> = (props) => {
+export const Categories: FC<CategoriesPropsType> = memo( (props) => {
     const {value, onClickCategory} = props
 
     const itemCategory = category.map((el, index) => {
@@ -22,4 +22,4 @@ export const Categories: FC<CategoriesPropsType> = (props) => {
             </ul>
         </div>
     )
-}
+})

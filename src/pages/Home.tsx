@@ -1,4 +1,4 @@
-import React, { useEffect, useRef} from 'react';
+import React, {useCallback, useEffect, useRef} from "react";
 import {Categories} from "../component/categories/Categories";
 import {list, Sort} from "../component/sort/Sort";
 import {PizzaSkeleton} from "../component/pizza_block/PizzaSkeleton";
@@ -30,9 +30,10 @@ export const Home = () => {
     const {items, status} = useSelector(selectPizza)
     const {categoryId, currentPage, sort, searchValue} = useSelector(selectFilter)
 
-    const onClickCategory = (id:number) => {
+    const onClickCategory = useCallback((id:number) => {
         dispatch(setCategoryId(id))
-    }
+    },[])
+
     const onChangePage = (page:number) => {
         dispatch(setCurrentPage(page));
     };
@@ -96,12 +97,6 @@ export const Home = () => {
     const skeletons = [...new Array(4)].map((_, i) => <PizzaSkeleton
         key={i}/>)
 
-    /*const pizzas = items.map((obj) => {
-        return <Link key={obj.id} to={`/pizza/${obj.id}`}><PizzaBlock
-
-            {...obj}
-        /></Link>
-    })*/
     type PizzaType = {
         id: string
         price: number
@@ -109,7 +104,6 @@ export const Home = () => {
         imageUrl: string
         sizes: Array<number>
         types: Array<number>
-
     }
     const pizzas = items.map((obj:PizzaType) => {
         return <div key={obj.id}><PizzaBlock
@@ -133,7 +127,7 @@ export const Home = () => {
             <div className="content__top">
                 <Categories value={categoryId}
                             onClickCategory={onClickCategory}/>
-                <Sort/>
+                <Sort sort={sort}/>
             </div>
             <h2 className="content__title">Все пиццы</h2>
             <div className="content__items">

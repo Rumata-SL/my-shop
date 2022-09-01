@@ -5,10 +5,11 @@ import iconClear from "./iconClear.svg"
 import debounce from "lodash.debounce"
 import {useDispatch, useSelector} from "react-redux";
 import {selectsearchValue, setSearchValue} from "../../redux/slice/filterSlice";
+import {useAppDispatch} from "../../redux/store";
 
 export const Search = () => {
     const [value, setValue] = useState("")
-    const dispatch = useDispatch()
+    const dispatch = useAppDispatch()
     const searchValue = useSelector(selectsearchValue)
     const inputRef = useRef<HTMLInputElement>(null)
 
