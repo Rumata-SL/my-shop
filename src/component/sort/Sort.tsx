@@ -1,11 +1,6 @@
-import React, { useEffect, useRef, useState} from "react";
-import {useDispatch, useSelector} from "react-redux";
-import {
-    selectFilterSort,
-    setSortType, SortType
-} from "../../redux/slice/filterSlice";
-import {useAppDispatch} from "../../redux/store";
-
+import {useDispatch} from "react-redux";
+import React, {FC, memo, useEffect, useRef, useState} from "react";
+import {setSortType, SortType} from "../../redux/slice/filterSlice";
 
 export enum SortPropertyEnum {
     RATING_DESC = "rating",
@@ -15,22 +10,28 @@ export enum SortPropertyEnum {
     PRICE_DESC = "price",
     PRICE_ASC = "_price",
 }
-export const list:Array<SortType> = [
-    { name: 'популярности (DESC)', sortProperty: SortPropertyEnum.RATING_DESC },
-    { name: 'популярности (ASC)', sortProperty: SortPropertyEnum.RATING_ASC },
-    { name: 'цене (DESC)', sortProperty: SortPropertyEnum.PRICE_DESC },
-    { name: 'цене (ASC)', sortProperty: SortPropertyEnum.PRICE_ASC },
-    { name: 'алфавиту (DESC)', sortProperty: SortPropertyEnum.TITLE_DESC },
-    { name: 'алфавиту (ASC)', sortProperty: SortPropertyEnum.TITLE_ASC },
+
+export const list: Array<SortType> = [
+    {name: "популярности (DESC)", sortProperty: SortPropertyEnum.RATING_DESC},
+    {name: "популярности (ASC)", sortProperty: SortPropertyEnum.RATING_ASC},
+    {name: "цене (DESC)", sortProperty: SortPropertyEnum.PRICE_DESC},
+    {name: "цене (ASC)", sortProperty: SortPropertyEnum.PRICE_ASC},
+    {name: "алфавиту (DESC)", sortProperty: SortPropertyEnum.TITLE_DESC},
+    {name: "алфавиту (ASC)", sortProperty: SortPropertyEnum.TITLE_ASC},
 ]
-export const Sort = () => {
-    const sortType = useSelector(selectFilterSort)
+type SortPropsType = {
+    sort:SortType
+}
+
+export const Sort:FC<SortPropsType> = memo(({sort}) => {
+
     const dispatch = useDispatch()
 
     const [isVisible, setIsVisible] = useState(false)
+
     const sortRef = useRef<HTMLDivElement | null>(null)
 
-    const isVisibleHandler = (i:SortType) => {
+    const isVisibleHandler = (i: SortType) => {
         dispatch(setSortType(i))
         setIsVisible(false)
     }
@@ -38,7 +39,7 @@ export const Sort = () => {
     const listRenderPopUp = list.map((obj, i) => {
         return <>
             <li key={i}
-                className={sortType.sortProperty === obj.sortProperty ? "active" : ""}
+                className={sort.sortProperty === obj.sortProperty ? "active" : ""}
                 onClick={() => {
                     isVisibleHandler(obj)
                 }}>{obj.name}</li>
@@ -46,16 +47,16 @@ export const Sort = () => {
     })
     useEffect(() => {
 
-        const handleClickOutside = (event:MouseEvent) => {
+        const handleClickOutside = (event: MouseEvent) => {
 
             if (sortRef.current && !event.composedPath().includes(sortRef.current)) {
                 setIsVisible(false)
             }
         }
-        document.body.addEventListener('click', handleClickOutside)
+        document.body.addEventListener("click", handleClickOutside)
 
-        return ()=>{
-            document.body.removeEventListener('click', handleClickOutside)
+        return () => {
+            document.body.removeEventListener("click", handleClickOutside)
         }
     }, [])
 
@@ -77,7 +78,7 @@ export const Sort = () => {
                 <b>Сортировка по:</b>
                 <span onClick={() => {
                     setIsVisible(!isVisible)
-                }}>{sortType.name}</span>
+                }}>{sort.name}</span>
             </div>
             {
                 isVisible ? <div className="sort__popup">
@@ -86,7 +87,6 @@ export const Sort = () => {
                     </ul>
                 </div> : null
             }
-
         </div>
     )
-}
+})
