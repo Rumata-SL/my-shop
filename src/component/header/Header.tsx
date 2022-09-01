@@ -1,4 +1,4 @@
-import React from "react";
+import React, {useEffect, useRef} from "react";
 import pizzaLogo from "../../assets/img/pizza-logo.svg"
 import {Link, useLocation} from "react-router-dom";
 import {Search} from "../search/Serch";
@@ -10,10 +10,20 @@ export const Header = () => {
     const {items, totalPrice} = useSelector(selectCart)
     // const pathname = window.location.pathname
     const {pathname} = useLocation()
+    const isMounted = useRef(false)
 
     const totalCount = items.reduce((acc:number, item:any) => {
         return acc + item.count
     }, 0)
+
+    useEffect(()=>{
+        if(isMounted.current){
+        const json = JSON.stringify(items)
+        localStorage.setItem('cart', json)
+        }
+
+        isMounted.current = true
+    },[items])
 
     return (
         <div className="header">
