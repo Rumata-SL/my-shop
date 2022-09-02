@@ -7,7 +7,7 @@ import {CartItemType, clearItems, selectCart} from "../redux/slice/cartSlice";
 import {CartEmpty} from "../component/cartEmpty";
 
 
-const Cart = () => {
+ const Cart = () => {
     const dispatch = useDispatch()
     const {totalPrice, items} = useSelector(selectCart)
     const totalCount = items.reduce((acc:number, item:CartItemType)=>{
