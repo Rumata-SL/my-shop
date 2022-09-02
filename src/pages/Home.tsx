@@ -1,25 +1,19 @@
+import qs from "qs"
+import {useNavigate} from "react-router-dom";
+import {list, Sort} from "../component/sort/Sort";
+import {useDispatch, useSelector} from "react-redux";
 import React, {useCallback, useEffect, useRef} from "react";
 import {Categories} from "../component/categories/Categories";
-import {list, Sort} from "../component/sort/Sort";
-import {PizzaSkeleton} from "../component/pizza_block/PizzaSkeleton";
-import {PizzaBlock} from "../component/pizza_block/PizzaBlock";
 import {Pagination} from "../component/pagination/Pagination";
-import {useDispatch, useSelector} from "react-redux";
+import {PizzaBlock} from "../component/pizza_block/PizzaBlock";
+import {fetchPizzas, selectPizza} from "../redux/slice/pizzasSlice";
+import {PizzaSkeleton} from "../component/pizza_block/PizzaSkeleton";
 import {
     selectFilter,
     setCategoryId,
     setCurrentPage,
     setFilters
 } from "../redux/slice/filterSlice";
-import qs from "qs"
-import {useNavigate} from "react-router-dom";
-import {
-    fetchPizzas,
-    SearchPizzaParams,
-    selectPizza
-} from "../redux/slice/pizzasSlice";
-
-
 
 export const Home = () => {
     const navigate = useNavigate()
@@ -28,30 +22,35 @@ export const Home = () => {
     const isMounted = useRef(false)
 
     const {items, status} = useSelector(selectPizza)
-    const {categoryId, currentPage, sort, searchValue} = useSelector(selectFilter)
+    const {
+        categoryId,
+        currentPage,
+        sort,
+        searchValue
+    } = useSelector(selectFilter)
 
-    const onClickCategory = useCallback((id:number) => {
+    const onClickCategory = useCallback((id: number) => {
         dispatch(setCategoryId(id))
-    },[])
+    }, [])
 
-    const onChangePage = (page:number) => {
+    const onChangePage = (page: number) => {
         dispatch(setCurrentPage(page));
     };
 
     const getPizzas = () => {
         const sortBy = sort.sortProperty.replace("_", "")
         const order = sort.sortProperty.includes("_",) ? "asc" : "desc";
-        const category = categoryId > 0 ? `category=${categoryId}` : ''
-        const search = searchValue ? `search=${searchValue}` : ''
+        const category = categoryId > 0 ? `category=${categoryId}` : ""
+        const search = searchValue ? `search=${searchValue}` : ""
         dispatch(
-        //@ts-ignore
+            //@ts-ignore
             fetchPizzas({
-            sortBy,
-            order,
-            category,
-            search,
-            currentPage: String(currentPage),
-        }));
+                sortBy,
+                order,
+                category,
+                search,
+                currentPage: String(currentPage),
+            }));
         window.scrollTo(0, 0);
     }
 
@@ -71,7 +70,7 @@ export const Home = () => {
         if (window.location.search) {
             const params = qs.parse(window.location.search.substring(1));
             const sort = list.find(obj => obj.sortProperty === params.sortBy);
-            if(sort){
+            if (sort) {
                 params.sort = sort
             }
             //@ts-ignore
@@ -85,7 +84,6 @@ export const Home = () => {
     }, [])
 
     useEffect(() => {
-        // getPizzas()
         // window.scrollTo(0, 0);
 
         if (!isSearch.current) {
@@ -105,14 +103,13 @@ export const Home = () => {
         sizes: Array<number>
         types: Array<number>
     }
-    const pizzas = items.map((obj:PizzaType) => {
+    const pizzas = items.map((obj: PizzaType) => {
         return <div key={obj.id}><PizzaBlock
-
             {...obj}
         /></div>
     })
 
-    if (status === 'error') {
+    if (status === "error") {
         return <div className="content__error-info">
             <h2>Произошла ошибка
                 <span>😕</span>
@@ -132,7 +129,7 @@ export const Home = () => {
             <h2 className="content__title">Все пиццы</h2>
             <div className="content__items">
                 {
-                    status === 'loading' ? skeletons : pizzas
+                    status === "loading" ? skeletons : pizzas
                 }
             </div>
             <Pagination currentPage={currentPage}

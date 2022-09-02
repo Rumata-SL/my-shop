@@ -1,13 +1,12 @@
-import React from 'react';
-import Cart from "./Cart";
+import React from "react";
+import {NotFoundBlock} from "../component/not_found/NotFoundBlock";
 
- const NotFound = () => {
+const NotFound = () => {
     return (
         <div>
-            {/*<NotFoundBlock/>*/}
-            <Cart/>
+            <NotFoundBlock/>
         </div>
     );
 };
-export  default NotFound
+export default NotFound
 

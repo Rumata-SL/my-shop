@@ -5,7 +5,7 @@ export const NotFoundBlock = () => {
     return (
         <div className={style.container}>
             <h1>
-                <span>{`}:() `}</span>
+                <span>😕</span>
                 <br/>
                 Ничего не найдено
                 <br/>

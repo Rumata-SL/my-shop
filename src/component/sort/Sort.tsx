@@ -20,10 +20,10 @@ export const list: Array<SortType> = [
     {name: "алфавиту (ASC)", sortProperty: SortPropertyEnum.TITLE_ASC},
 ]
 type SortPropsType = {
-    sort:SortType
+    sort: SortType
 }
 
-export const Sort:FC<SortPropsType> = memo(({sort}) => {
+export const Sort: FC<SortPropsType> = memo(({sort}) => {
 
     const dispatch = useDispatch()
 

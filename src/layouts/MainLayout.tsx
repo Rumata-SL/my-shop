@@ -1,6 +1,6 @@
-import React from 'react';
-import {Header} from "../component/header/Header";
+import React from "react";
 import {Outlet} from "react-router-dom";
+import {Header} from "../component/header/Header";
 
 
 export const MainLayout = () => {

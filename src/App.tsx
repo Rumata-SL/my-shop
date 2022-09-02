@@ -1,4 +1,3 @@
-//https://62c5ec33134fa108c25fac28.mockapi.io/items
 import "./scss/app.scss"
 import React, {Suspense} from "react";
 import {Home} from "./pages/Home";
@@ -27,9 +26,3 @@ export function App() {
     );
 }
 
-{/*<Route path="pizza/:id" element={<FullPizza/>}></Route>*/
-}
-{/*<Route path="cart" element={<Cart/>}></Route>*/
-}
-{/*<Route path="*" element={<NotFound/>}></Route>*/
-}

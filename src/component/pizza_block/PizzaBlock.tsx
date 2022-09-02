@@ -1,12 +1,12 @@
 import React, {FC, useState} from "react";
-import {useDispatch, useSelector} from "react-redux";
+import {useSelector} from "react-redux";
+import {Link} from "react-router-dom";
+import {useAppDispatch} from "../../redux/store";
 import {
     addItem,
     CartItemType,
     selectCartItemById
 } from "../../redux/slice/cartSlice";
-import {Link} from "react-router-dom";
-import {useAppDispatch} from "../../redux/store";
 
 type PizzaBlockPropsType = {
     id: string
@@ -18,7 +18,7 @@ type PizzaBlockPropsType = {
 
 }
 
-export const PizzaBlock:FC<PizzaBlockPropsType> = (props) => {
+export const PizzaBlock: FC<PizzaBlockPropsType> = (props) => {
     const {id, price, title, imageUrl, sizes, types} = props
 
     const dispatch = useAppDispatch()
@@ -31,34 +31,31 @@ export const PizzaBlock:FC<PizzaBlockPropsType> = (props) => {
     const addedCount = cartItem ? cartItem.count : 0;
 
     const onClickAdd = () => {
-        const item:CartItemType = {
+        const item: CartItemType = {
             id,
             title,
             price,
             imageUrl,
             type: typeName[activeTypes],
             size: sizes[activeSizes],
-            count:0,
+            count: 0,
         }
         dispatch(addItem(item))
     }
 
-    const pizzaSizes = sizes?.map((size:number, index:number) => {
+    const pizzaSizes = sizes?.map((size: number, index: number) => {
         return <li key={size} onClick={() => {
-                setActiveSizes(index)
-            }} className={activeSizes === index ? "active" : ""}>{size} см.
-            </li>
-
+            setActiveSizes(index)
+        }} className={activeSizes === index ? "active" : ""}>{size} см.
+        </li>
     })
 
-    const pizzaTypes = types?.map((typeId:number, i:number) => {
+    const pizzaTypes = types?.map((typeId: number, i: number) => {
         return <li key={typeId} onClick={() => {
-                setActiveTypes(typeId)
-            }}
-                className={activeTypes === typeId ? "active" : ""}> {typeName[typeId]}</li>
-
+            setActiveTypes(typeId)
+        }}
+                   className={activeTypes === typeId ? "active" : ""}> {typeName[typeId]}</li>
     })
-
 
     return (
         <div className="pizza-block-wrapper">
