@@ -13,7 +13,7 @@ type PizzaType={
     rating: number
 }
 
-export const FullPizza = () => {
+const FullPizza = () => {
     const [pizza, setPizza] = useState<PizzaType>()
     const navigate = useNavigate()
 
@@ -46,3 +46,4 @@ export const FullPizza = () => {
         </div>
     );
 };
+export default FullPizza
