@@ -1,9 +1,9 @@
 {
   "files": {
     "main.css": "/my-shop/static/css/main.0e394c94.css",
-    "main.js": "/my-shop/static/js/main.a45b3e0f.js",
-    "Cart.js": "/my-shop/static/js/Cart.a7ab27fd.chunk.js",
+    "main.js": "/my-shop/static/js/main.c21dc333.js",
     "FullPizza.js": "/my-shop/static/js/FullPizza.7b03cd18.chunk.js",
+    "Cart.js": "/my-shop/static/js/Cart.a7ab27fd.chunk.js",
     "NotFound.js": "/my-shop/static/js/NotFound.9de11285.chunk.js",
     "static/media/empty-cart.png": "/my-shop/static/media/empty-cart.db905d1f4b063162f25b.png",
     "static/media/pizza-logo.svg": "/my-shop/static/media/pizza-logo.56ac87032d8f6fdf863326acd06c0d97.svg",
@@ -11,13 +11,13 @@
     "static/media/iconSearch.svg": "/my-shop/static/media/iconSearch.1ca7eabfc5bcb8a189d313e1efcae881.svg",
     "static/media/iconClear.svg": "/my-shop/static/media/iconClear.157fd6e744848852d19a7ec16b8d9b38.svg",
     "main.0e394c94.css.map": "/my-shop/static/css/main.0e394c94.css.map",
-    "main.a45b3e0f.js.map": "/my-shop/static/js/main.a45b3e0f.js.map",
-    "Cart.a7ab27fd.chunk.js.map": "/my-shop/static/js/Cart.a7ab27fd.chunk.js.map",
+    "main.c21dc333.js.map": "/my-shop/static/js/main.c21dc333.js.map",
     "FullPizza.7b03cd18.chunk.js.map": "/my-shop/static/js/FullPizza.7b03cd18.chunk.js.map",
+    "Cart.a7ab27fd.chunk.js.map": "/my-shop/static/js/Cart.a7ab27fd.chunk.js.map",
     "NotFound.9de11285.chunk.js.map": "/my-shop/static/js/NotFound.9de11285.chunk.js.map"
   },
   "entrypoints": [
     "static/css/main.0e394c94.css",
-    "static/js/main.a45b3e0f.js"
+    "static/js/main.c21dc333.js"
   ]
 }
